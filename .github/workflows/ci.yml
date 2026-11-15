@@ -1,0 +1,37 @@
+name: MiniTask CI
+
+on:
+  push:
+    branches: [ "main","master" ]
+  pull_request:
+    branches: [ "main","master" ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install development dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Run automated pytest suite
+        run: python -m pytest -q
+
+      # TODO: Set up Python 3.12 using actions/setup-python.
+      # TODO: Install requirements-dev.txt.
+      # TODO: Run pytest.
+      # TODO: Build the Docker image as minitask:ci.
+  # Step 5: Build Docker image
+     - name: Build Docker image
+       run: docker build -t minitask:ci .
