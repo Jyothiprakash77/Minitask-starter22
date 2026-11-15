@@ -28,10 +28,10 @@ jobs:
       - name: Run automated pytest suite
         run: python -m pytest -q
 
+      - name: Build Docker image
+        run: docker build -t minitask:ci .
+
       # TODO: Set up Python 3.12 using actions/setup-python.
       # TODO: Install requirements-dev.txt.
       # TODO: Run pytest.
       # TODO: Build the Docker image as minitask:ci.
-  # Step 5: Build Docker image
-     - name: Build Docker image
-       run: docker build -t minitask:ci .
